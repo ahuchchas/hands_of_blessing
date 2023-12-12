@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { fs } from "../../../Firebase/firebase.config";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function AllProjects() {
   const [projects, setProjects] = useState([]);
@@ -58,6 +58,11 @@ export default function AllProjects() {
                     {project.description}
                   </p>
                 </div>
+                <Link
+                  to={`/admin/project-response/${project.id}/${project.title}`}
+                >
+                  <u>See responses of the volunteers</u>
+                </Link>
                 <div className="card-actions justify-end ">
                   <button
                     className="btn bg-emerald-400 mt-2 w-25"

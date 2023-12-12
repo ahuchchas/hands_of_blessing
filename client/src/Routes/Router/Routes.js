@@ -24,6 +24,7 @@ import DeleteProject from "../../Pages/AdminDash/DeleteProject/DeleteProject";
 import Donate from "../../Pages/Donate/Donate";
 import DonateSuccess from "../../Pages/Donate/DonateSuccess/DonateSuccess";
 import Chats from "../../Pages/VolunteerDash/Chats/Chats";
+import ProjectResponse from "../../Pages/AdminDash/ProjectResponse/ProjectResponse";
 
 export const router = createBrowserRouter([
   {
@@ -113,6 +114,10 @@ export const router = createBrowserRouter([
           {
             path: "deleteproject",
             element: <DeleteProject></DeleteProject>,
+          },
+          {
+            path: "project-response/:project_id/:project_title",
+            element: <ProjectResponse></ProjectResponse>,
           },
           {
             path: "helps",
