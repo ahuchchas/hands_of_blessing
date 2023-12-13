@@ -1,12 +1,37 @@
-import React, { useState } from "react";
-import { collection, addDoc, setDoc, doc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import {
+  collection,
+  addDoc,
+  setDoc,
+  doc,
+  onSnapshot,
+  query,
+} from "firebase/firestore";
 import { fs, storage } from "../../../Firebase/firebase.config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
-
+import emailjs from "@emailjs/browser";
 export default function NewProject() {
   const [inputError, setInputError] = useState("");
+  const [volunteers, setVolunteers] = useState([]);
+
   const navigate = useNavigate();
+  emailjs.init("II3RUPGmEY_7oiHEQ");
+
+  useEffect(() => {
+    onSnapshot(query(collection(fs, "volunteers")), (querySnapshot) => {
+      const usersInfo = [];
+      querySnapshot.forEach((doc) => {
+        const userInfo = {
+          email: doc.data().email,
+          name: doc.data().name,
+        };
+
+        usersInfo.push(userInfo);
+        setVolunteers(usersInfo);
+      });
+    });
+  }, []);
 
   const handleAddProject = async (event) => {
     event.preventDefault();
@@ -48,6 +73,18 @@ export default function NewProject() {
                   setDoc(doc(fs, "projects", docRef.id), {
                     ...data,
                   });
+                  let message = `A new project titled '${title}' has been created by Hands of blessings. Please check it !!`;
+
+                  if (volunteers.length > 0) {
+                    volunteers.forEach((volunteer) => {
+                      emailjs.send("service_mvv1e0g", "template_r2a2wyh", {
+                        message: message,
+                        to_email: volunteer.email,
+                        from_name: "Hands of Blessings Team",
+                        to_name: volunteer.name,
+                      });
+                    });
+                  }
                 })
                 .catch((e) => {
                   console.log(e);

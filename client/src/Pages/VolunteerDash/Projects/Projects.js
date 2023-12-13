@@ -1,24 +1,84 @@
-import { collection, getDocs } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  setDoc,
+} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { fs } from "../../../Firebase/firebase.config";
-
+import { getAuth } from "firebase/auth";
+const auth = getAuth();
 export default function Projects() {
   const [projects, setProjects] = useState([]);
+  const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const fetchProjects = async () => {
+  async function checkInterested(pid) {
+    const docRef = doc(fs, "projects", pid, "InterestedUsers", user.uid);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  const fetchProjects = async () => {
+    if (user === null) {
+      const uid = auth.currentUser.uid;
+      const docRef = doc(fs, "volunteers", uid);
+      await getDoc(docRef).then((doc) => {
+        const u = {
+          uid: doc.data().uid,
+          name: doc.data().name,
+          email: doc.data().email,
+          phone: doc.data().phone,
+        };
+        setUser(u);
+      });
+    }
+    if (user) {
+      // console.log(user);
       const ps = [];
       const querySnapshot = await getDocs(collection(fs, "projects"));
       querySnapshot.forEach((doc) => {
         // console.log(doc.id);
         const project = doc.data();
         project.id = doc.id;
+
         ps.push(project);
       });
-      setProjects(ps);
-    };
+      ps.forEach(async (p) => {
+        p.interested = await checkInterested(p.id);
+        // console.log(p);
+        setProjects(ps);
+      });
+    }
+  };
+
+  useEffect(() => {
     fetchProjects();
-  }, []);
+  }, [user]);
+
+  const interestHandler = (project) => {
+    const docRef = doc(fs, "projects", project.id, "InterestedUsers", user.uid);
+    if (project.interested) {
+      //remove interest
+      deleteDoc(docRef);
+      alert(
+        "You are removed from the list of interested volunteers in this project."
+      );
+      fetchProjects();
+    } else {
+      //set interest
+      setDoc(docRef, user);
+      alert(
+        "Congratulations! You are listed as an interested volunteer in this project. We will contact you when needed."
+      );
+      fetchProjects();
+    }
+  };
 
   return (
     <div>
@@ -56,24 +116,16 @@ export default function Projects() {
                     {project.description}
                   </p>
                 </div>
-                {/* <div className="card-actions justify-end ">
+                <div className="card-actions justify-end ">
                   <button
-                    className="btn bg-emerald-400 mt-2 w-25"
-                    onClick={() => {
-                      navigate("/admin/editproject", { state: project });
-                    }}
+                    className={`btn btn-wide text-white ${
+                      project.interested ? "bg-secondary" : "bg-primary"
+                    } `}
+                    onClick={() => interestHandler(project)}
                   >
-                    Edit
+                    {`${project.interested ? "Not" : ""} Interested?`}
                   </button>
-                  <button
-                    className="btn bg-gray-400 mt-2 w-25"
-                    onClick={() => {
-                      navigate("/admin/deleteproject", { state: project });
-                    }}
-                  >
-                    Delete
-                  </button>
-                </div> */}
+                </div>
               </div>
             </div>
           );
