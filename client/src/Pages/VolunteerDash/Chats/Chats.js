@@ -108,22 +108,22 @@ export default function Chats() {
   {
   }
   return (
-    <div className="p-4 m-4  bg-slate-200  max-h-100  ">
-      <div className="flex bg-gray-100 w-full min-h-full p-2">
-        <div className="w-5/12 bg-white rounded p-3 shadow-lg">
-          <div className="flex items-center space-x-4 p-2 mb-5">
-            <div className="avatar me-4">
-              <div className="w-12 rounded-full">
-                <img src={auth.currentUser.photoURL} />
+    <div className="p-4 m-4   max-h-100  bg-amber-200 ">
+      <div className="flex w-full min-h-full p-2">
+        <div className="w-5/12 bg-white rounded p-3 ">
+          <div className="">
+            <div className="flex items-center space-x-4 p-2 mb-5 ">
+              <div className="avatar me-4">
+                <div className="w-12 rounded-full">
+                  <img src={auth.currentUser.photoURL} />
+                </div>
               </div>
-            </div>
-            <div>
               <h4 className="font-semibold text-lg text-gray-700 capitalize font-poppins tracking-wide">
                 {auth.currentUser.displayName}
               </h4>
             </div>
           </div>
-          <ul className="space-y-2 text-sm overflow-y-auto">
+          <ul className="space-y-1 text-sm overflow-y-auto">
             {users
               .filter((user) => user.uid !== volunteer.uid)
               .map((user) => {
@@ -191,7 +191,9 @@ export default function Chats() {
                             <div className="chat-header">
                               {message.senderName}
                             </div>
-                            <div className="chat-bubble ">{message.text}</div>
+                            <div className="chat-bubble  bg-amber-200 text-slate-700">
+                              {message.text}
+                            </div>
                             <time className="text-xs opacity-50">
                               {message.timestamp &&
                                 message.timestamp.toDate().toLocaleString()}
@@ -208,7 +210,9 @@ export default function Chats() {
                               {selectedUser.name}
                               <time className="text-xs opacity-50"></time>
                             </div>
-                            <div className="chat-bubble ">{message.text}</div>
+                            <div className="chat-bubble bg-slate-300 text-slate-600 ">
+                              {message.text}
+                            </div>
                             <div className="chat-footer opacity-50">
                               {message.timestamp &&
                                 message.timestamp.toDate().toLocaleString()}
@@ -285,8 +289,8 @@ export default function Chats() {
                 </div>
               </div>
             ) : (
-              <div className=" d-flex justify-center items-center  ">
-                <p>Select a user to start chatting.</p>
+              <div className="w-full min-h-screen flex  justify-center items-center">
+                <h2>Select a user to start chatting.</h2>
               </div>
             )}
           </div>

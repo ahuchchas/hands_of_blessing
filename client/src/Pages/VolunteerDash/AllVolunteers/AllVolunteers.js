@@ -39,15 +39,55 @@ export default function AllVolunteers() {
   }, []);
 
   return (
-    <div
-      className="container "
-      style={{ maxHeight: "100vh", overflowY: "scroll" }}
-    >
-      <h1 className="h1 text-blue-900 my-auto text-center p-4">Volunteers </h1>
-      <div className="row gap-4 justify-center">
+    <div className="container ">
+      <div className="text-center">
+        <h1 className=" text-5xl text-gray-700 my-6   font-bold">
+          All Volunteers{" "}
+        </h1>
+        <h1 className="h6 text-orange-400">
+          ---Here is our most talented volunteers---
+        </h1>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-2">
+        {users &&
+          users.map((user) => {
+            return (
+              <div className="card w-80 bg-white shadow-xl rounded-none border-b-slate-100 border-b-8">
+                <figure className="px-10 pt-10">
+                  {user.imageRef ? (
+                    <img
+                      src={user.imageRef}
+                      className="img-fluid w-100 h-40 rounded-xl"
+                      alt="Album"
+                    />
+                  ) : (
+                    <img
+                      src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
+                      className="img-fluid w-100 h-40 rounded-xl"
+                      alt="Album"
+                    />
+                  )}
+                </figure>
+                <div className="card-body items-center text-center rounded-none">
+                  <h2 className="card-title text-accent">{user.name}</h2>
+                  <div>
+                    <p>{user.email}</p>
+                    <p>{user.phone}</p>
+
+                    <p>{user.address}</p>
+                  </div>
+                  <div className="card-actions"></div>
+                </div>
+              </div>
+            );
+          })}
+      </div>
+
+      {/**      <div className="row gap-4 justify-center">
         <div className="overflow-x-auto w-full">
           <table className="table w-full">
-            {/* head */}
+          
             <thead>
               <tr>
                 <th>Name</th>
@@ -104,7 +144,7 @@ export default function AllVolunteers() {
             </tbody>
           </table>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

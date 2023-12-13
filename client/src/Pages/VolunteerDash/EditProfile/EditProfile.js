@@ -13,7 +13,7 @@ const styles = {
     padding: "8px",
     borderRadius: "8px",
     border: "2px solid lightgray",
-    backgroundColor: "#F5F7FE",
+    backgroundColor: "#F5F7CE",
   },
 };
 export default function EditProfile() {
@@ -97,12 +97,11 @@ export default function EditProfile() {
   return (
     <div className="d-flex justify-center mt-5 ">
       <div
-        className="card w-75 mt-6 p-4"
+        className="card w-75 mt-6 p-4  border-t-4 border-t-accent"
         style={{
           boxShadow: "1px 1px  gray",
           backgroundColor: "white",
-          borderRadius: 0,
-          borderTop: "10px solid #195b7f",
+
           backgroundColor: "white",
         }}
       >
@@ -128,8 +127,13 @@ export default function EditProfile() {
                 style={{ width: "300px", height: "250px" }}
               />
             )}{" "}
-            <label className="btn" for="img-upload" id="img-label">
-              upload image
+            <label
+              className="btn"
+              for="img-upload"
+              id="img-label"
+              style={{ backgroundColor: "#F5F7CE" }}
+            >
+              Update image
             </label>
             <input
               id="img-upload"
@@ -173,8 +177,8 @@ export default function EditProfile() {
               />
               <button
                 type="submit"
-                className="btn mt-2"
-                style={{ backgroundColor: "#195b7f", color: "white" }}
+                className="btn btn-accent
+                 mt-3"
               >
                 Save Changes
               </button>

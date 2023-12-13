@@ -12,7 +12,6 @@ export default function Home() {
       <Services></Services>
       <DonationCover></DonationCover>
       <JoinUs></JoinUs>
-      <ContactUs></ContactUs>
     </div>
   );
 }

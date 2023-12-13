@@ -12,7 +12,7 @@ const styles = {
   },
   buttonStyles: {
     backgroundColor: "#00cfc8",
-    color: "rgb(13, 19, 56)",
+
     width: "100%",
 
     borderRadius: "0",

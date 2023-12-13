@@ -1,10 +1,13 @@
 import "./App.css";
+import AuthProvider from "./Provider/AuthProvider";
 import { router } from "./Routes/Router/Routes";
 import { RouterProvider } from "react-router-dom";
 function App() {
   return (
     <div className="max-w-full mx-auto">
-      <RouterProvider router={router}></RouterProvider>
+      <AuthProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </AuthProvider>
     </div>
   );
 }

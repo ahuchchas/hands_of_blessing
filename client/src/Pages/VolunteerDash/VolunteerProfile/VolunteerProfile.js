@@ -49,12 +49,9 @@ export default function VolunteerProfile() {
   return (
     <div className="d-flex justify-center mt-5 ">
       <div
-        className="card w-75 mt-6 "
+        className="card w-75 mt-6  bg-white   "
         style={{
-          boxShadow: "1px 1px  gray",
           minHeight: "15rem",
-          borderRadius: 0,
-          borderBottom: "5px solid gray",
         }}
       >
         {Object.keys(user).length === 0 ? (
@@ -65,12 +62,12 @@ export default function VolunteerProfile() {
           </div>
         ) : (
           <div>
-            <div
-              className=" d-flex justify-between  p-4"
-              style={{ backgroundColor: "rgb(13, 19, 56)" }}
-            >
-              <div>
-                <h3 className="h3 text-white">My Profile</h3>
+            <div className=" d-flex justify-between  p-4">
+              <div
+                className="p-1"
+                style={{ borderBottom: "2px solid #fcb900" }}
+              >
+                <h3 className="h3 text-slate-500">My Profile</h3>
               </div>
               <div>
                 <button
@@ -84,44 +81,39 @@ export default function VolunteerProfile() {
                 </button>
               </div>
             </div>
-            <div className="row p-4">
+            <div className="row   p-4">
               <div className="col-md-4 d-flex flex-col justify-center ">
-                {userPhoto ? (
-                  <img
-                    className="card-img-top img-fluid mb-3 img-thumbnail"
-                    src={userPhoto}
-                    alt="Card img cap"
-                    id="img-preview"
-                    style={{
-                      width: "300px",
-                      height: "250px",
-                    }}
-                  />
-                ) : (
-                  <img
-                    className="card-img-top img-fluid mb-3 img-thumbnail"
-                    src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
-                    alt="Card img cap"
-                    id="img-preview"
-                    style={{
-                      width: "300px",
-                      height: "250px",
-                    }}
-                  />
-                )}
+                <div>
+                  {userPhoto ? (
+                    <div className="avatar">
+                      <div className="  w-48 rounded-full">
+                        <img src={userPhoto} />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="avatar ">
+                      <div className="w-24 rounded-full">
+                        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
               <div className="col-md-8">
-                <div className="card-body">
+                <div className="card-body border-1 rounded">
                   <h5 className="card-title">Name: {user.name}</h5>
-                  <p className="card-text">Email: {user.email}</p>
-                  <p className="card-text">Phone Number: {user.phone}</p>
-                  <p className="card-text">Address: {user.address}</p>
+                  <p className="">Email: {user.email}</p>
+                  <p className="">Phone Number: {user.phone}</p>
+                  <p className="">Address: {user.address}</p>
                   {!user.availableArea ? (
                     <p className="font-bold" style={{ color: "gray" }}>
                       Not Available Now
                     </p>
                   ) : (
-                    <p className="card-text font-bold text-green-700">
+                    <p
+                      className="card-text font-bold"
+                      style={{ color: "#fcb900" }}
+                    >
                       Available in {user.availableArea}
                     </p>
                   )}
