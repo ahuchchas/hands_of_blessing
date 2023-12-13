@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import { FaHandHoldingHeart } from "react-icons/fa";
 import { getAuth } from "firebase/auth";
 import app from "../../Firebase/firebase.config";
 const auth = getAuth(app);
@@ -30,10 +30,7 @@ export default function Navbar() {
 
   return (
     <div>
-      <div
-        className="navbar shadow "
-        style={{ backgroundColor: "#0D1338", color: "white" }}
-      >
+      <div className="navbar shadow ">
         <div className="navbar-start ">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -73,14 +70,14 @@ export default function Navbar() {
               </li>
 
               {userType === "public" && (
-                <>
-                  <li>
-                    <Link to="/register">Register</Link>
-                  </li>
-                  <li>
-                    <Link to="/login">Log In</Link>
-                  </li>
-                </>
+                <li>
+                  <Link to="/register">Register</Link>
+                </li>
+              )}
+              {userType === "public" && (
+                <li>
+                  <Link to="/login">Log In</Link>
+                </li>
               )}
 
               {userType === "admin" && (
@@ -103,11 +100,8 @@ export default function Navbar() {
             </ul>
           </div>
 
-          <Link
-            to="/home"
-            className="btn btn-ghost normal-case text-xl text-white"
-          >
-            Hands of Blessing
+          <Link to="/home" className="btn btn-ghost ">
+            <FaHandHoldingHeart /> Hands of Blessing
           </Link>
         </div>
 

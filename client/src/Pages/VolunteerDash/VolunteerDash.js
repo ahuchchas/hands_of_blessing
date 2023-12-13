@@ -93,7 +93,7 @@ export default function VolunteerDash() {
             </ul>
           </div>
 
-          <div className="w-9/12" style={{ backgroundColor: "#F5F7FE" }}>
+          <div className="w-9/12" style={{ backgroundColor: "#fffec8" }}>
             <Outlet></Outlet>
           </div>
         </div>

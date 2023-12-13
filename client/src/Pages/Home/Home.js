@@ -11,7 +11,6 @@ export default function Home() {
       <Services></Services>
 
       <JoinUs></JoinUs>
-      <ContactUs></ContactUs>
     </div>
   );
 }

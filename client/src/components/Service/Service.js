@@ -1,15 +1,23 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 export default function Service({ title, description, image }) {
+  useEffect(() => {
+    AOS.init({ duration: 3000 });
+  }, []);
+
   return (
-    <div className="card w-96 bg-base-100 shadow-xl ">
-      <figure className="px-10 pt-10">
-        <img src={image} alt="" className="rounded-md w-50 my-5" />
-      </figure>
-      <div className="card-body items-center text-center">
+    <div
+      data-aos="fade-up"
+      className="card  rounded-none  w-96  shadow-xl  flex justify-center items-center"
+    >
+      <div className="p-3">
+        {" "}
+        <text className="  rounded text-5xl">{image}</text>
+      </div>
+      <div className="card-body">
         <h2 className="card-title">{title}</h2>
-        <p></p>
-        <div className="card-actions"></div>
+        <p>{description}</p>
       </div>
     </div>
   );

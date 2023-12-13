@@ -39,7 +39,14 @@ export default function Volunteers() {
       className="container "
       style={{ maxHeight: "100vh", overflowY: "scroll" }}
     >
-      <h1 className="h1 text-gray-700 my-auto text-center p-4">Volunteers </h1>
+      <div>
+        <h1 className="h1 text-gray-700 my-auto text-center p-4">
+          Volunteers{" "}
+        </h1>
+        <h1 className=" text-orange-500">
+          Here is our most talented volunteers
+        </h1>
+      </div>
       <div className="row gap-4 justify-center">
         <div className="overflow-x-auto w-full">
           <table className="table w-full">
