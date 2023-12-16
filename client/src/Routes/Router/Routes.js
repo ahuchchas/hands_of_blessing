@@ -25,6 +25,7 @@ import Donate from "../../Pages/Donate/Donate";
 import DonateSuccess from "../../Pages/Donate/DonateSuccess/DonateSuccess";
 import Chats from "../../Pages/VolunteerDash/Chats/Chats";
 import ProjectResponse from "../../Pages/AdminDash/ProjectResponse/ProjectResponse";
+import ProjectDescription from "../../Pages/ProjectDescription/ProjectDescription";
 
 export const router = createBrowserRouter([
   {
@@ -85,6 +86,11 @@ export const router = createBrowserRouter([
             path: "projects",
             element: <Projects></Projects>,
           },
+
+          {
+            path: "projects/:projectId",
+            element: <ProjectDescription></ProjectDescription>,
+          },
           {
             path: "chats",
             element: <Chats></Chats>,
@@ -122,6 +128,11 @@ export const router = createBrowserRouter([
           {
             path: "helps",
             element: <HelpRequests></HelpRequests>,
+          },
+
+          {
+            path: "projects/:projectId",
+            element: <ProjectDescription></ProjectDescription>,
           },
         ],
       },
