@@ -104,7 +104,7 @@ export default function NewProject() {
     <div className="flex justify-center p-5">
       <form
         onSubmit={handleAddProject}
-        className="form-control w-full max-w-md px-5 py-4"
+        className="form-control w-full max-w-md px-5 py-4 border-t-4 border-t-amber-300"
       >
         <p className="h3">Project Detail Form:</p>
         <label className="label">
@@ -172,7 +172,7 @@ export default function NewProject() {
 
         <input
           type="submit"
-          className="my-3 btn bg-sky-950 text-white"
+          className="my-3 btn bg-amber-300 text-white"
           value="Add Project"
         />
       </form>

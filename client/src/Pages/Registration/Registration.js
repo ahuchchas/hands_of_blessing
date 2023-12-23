@@ -15,17 +15,10 @@ const auth = getAuth(app);
 const styles = {
   inputStyles: {
     border: "none",
-    borderRadius: "0",
-    borderBottom: "1px solid gray",
-    padding: "5px",
+
+    border: "1px solid #FDFD96",
+    padding: "6px",
     width: "100%",
-  },
-  buttonStyles: {
-    backgroundColor: "#0D1338",
-    color: "white",
-    width: "100px",
-    height: "45px",
-    borderRadius: "0",
   },
 };
 
@@ -161,12 +154,11 @@ export default function Registration() {
   return (
     <div className="container d-flex flex-col justify-center align-items-center mt-5 mb-5 text-center rounded">
       <div
-        className="row rounded"
+        className="row rounded "
         style={{
-          width: "60%",
-          boxShadow: "2px 2px 2px 2px #006565",
-
-          backgroundColor: "#F2F2F2",
+          width: "70%",
+          boxShadow: "1px 1px 1px 1px gray",
+          backgroundColor: "#fffec8",
         }}
       >
         <div className="col-lg-6 col-md-5 col-sm-5  p-5 d-flex justify-center align-items-center">
@@ -245,11 +237,7 @@ export default function Registration() {
               />
             </div>
             <p style={{ color: "red" }}>{validate ? "" : error}</p>
-            <button
-              type="submit"
-              className="btn rounded mt-5 "
-              style={styles.buttonStyles}
-            >
+            <button type="submit" className="btn  btn-sm btn-accent mt-5 ">
               Submit
             </button>
           </form>

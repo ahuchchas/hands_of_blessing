@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { fs, storage } from "../../../Firebase/firebase.config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-
+import Swal from "sweetalert2";
 const EditProject = () => {
   const [inputError, setInputError] = useState("");
   const location = useLocation();
@@ -56,6 +56,12 @@ const EditProject = () => {
             .catch(() => console.log("error uploading image file"));
         }
         // console.log("project updated!");
+
+        Swal.fire({
+          title: "Project details successfully updated",
+
+          icon: "success",
+        });
         navigate("/admin/projects");
       } catch (e) {
         console.error("Error adding document: ", e);
@@ -146,7 +152,7 @@ const EditProject = () => {
 
         <input
           type="submit"
-          className="my-3 btn bg-sky-950 text-white"
+          className="my-3 btn  btn-accent text-white"
           value="Save edits"
         />
       </form>

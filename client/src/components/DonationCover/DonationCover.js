@@ -3,7 +3,7 @@ import { Parallax, Background } from "react-parallax";
 import img from "../../Pages/Donate/donate1.jpg";
 export default function DonationCover() {
   return (
-    <div className=" mt-14">
+    <div className=" ">
       <Parallax
         blur={{ min: -50, max: 50 }}
         bgImage={img}
@@ -26,7 +26,7 @@ export default function DonationCover() {
                 help. We need your support to continue the good work. Please
                 donate. Your contribution is really appreciated.
               </p>
-              <button className="btn btn-primary">
+              <button className="btn btn-accent rounded-none">
                 <a href="/donate">Donate Now</a>
               </button>
             </div>
