@@ -48,7 +48,7 @@ export default function AdminDash() {
     <div>
       {isAdmin && (
         <div className="flex bg-gray-100 w-full min-h-screen">
-          <div className="w-3/12 bg-white rounded p-3 shadow-lg">
+          <div className="w-3/12 bg-white rounded p-3 ">
             <div className="flex items-center space-x-4 p-2 mb-5">
               <img
                 className="h-12 rounded-full"

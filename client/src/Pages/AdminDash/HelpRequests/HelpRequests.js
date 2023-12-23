@@ -27,7 +27,9 @@ export default function HelpRequests() {
 
   return (
     <div>
-      <p className="m-4 text-2xl font-bold">Help Requests From Public</p>
+      <p className="m-4 text-4xl font-bold text-slate-800 text-center my-5">
+        Help Requests From Public
+      </p>
       <div className="overflow-x-auto m-2">
         <table className="table">
           {/* head */}
