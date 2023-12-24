@@ -42,6 +42,7 @@ export default function NewProject() {
     const ends = form.ends.value;
     const description = form.description.value;
     const photoUrl = null;
+    const contributions = [];
 
     //regex for validation
     const pattern = /^[\w., ]+$/;
@@ -56,7 +57,15 @@ export default function NewProject() {
       );
       return;
     } else {
-      const data = { title, location, starts, ends, description, photoUrl };
+      const data = {
+        title,
+        location,
+        starts,
+        ends,
+        description,
+        photoUrl,
+        contributions,
+      };
 
       try {
         const docRef = await addDoc(collection(fs, "projects"), data);

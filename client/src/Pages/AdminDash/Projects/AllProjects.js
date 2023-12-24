@@ -35,7 +35,7 @@ export default function AllProjects() {
         <h1 className="h1 text-center text-gray-700 p-4">Current Projects</h1>
       </div>
 
-      <div className="min-h-screen grid grid-cols-3 gap-3 m-3">
+      <div className="min-h-screen grid grid-cols-3 gap-3 m-3 items-start">
         {projects.map((project) => {
           return (
             <div className="card  w-80 bg-base-100 shadow-xl">
