@@ -1,9 +1,10 @@
 import React from "react";
 import { Parallax, Background } from "react-parallax";
 import img from "../../Pages/Donate/donate1.jpg";
+import { Link } from "react-router-dom";
 export default function DonationCover() {
   return (
-    <div className=" mt-14">
+    <div className=" ">
       <Parallax
         blur={{ min: -50, max: 50 }}
         bgImage={img}
@@ -26,8 +27,8 @@ export default function DonationCover() {
                 help. We need your support to continue the good work. Please
                 donate. Your contribution is really appreciated.
               </p>
-              <button className="btn btn-primary">
-                <a href="/donate">Donate Now</a>
+              <button className="btn  btn-warning">
+                <Link to="/donate">Donate Now</Link>
               </button>
             </div>
           </div>
