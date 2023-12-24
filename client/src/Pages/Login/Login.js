@@ -7,12 +7,10 @@ const auth = getAuth(app);
 const styles = {
   inputStyles: {
     border: "none",
-
+    backgroundColor: "#fffec8",
     padding: "10px",
   },
   buttonStyles: {
-    backgroundColor: "#00cfc8",
-
     width: "100%",
 
     borderRadius: "0",
@@ -66,10 +64,10 @@ export default function Login() {
       <div
         className="row  p-4"
         style={{
-          width: "50%",
+          width: "70%",
 
           borderRadius: "10px",
-          backgroundColor: "#F2F2F2",
+          backgroundColor: "#fffec8",
           boxShadow: "1px 1px 1px 1px gray",
         }}
       >
@@ -79,7 +77,7 @@ export default function Login() {
         <div className="col-md-6">
           <div>
             <h2
-              className="h2 mt-5"
+              className="h2 mt-5 text-slate-800"
               style={{
                 fontWeight: "bold",
               }}
@@ -92,7 +90,7 @@ export default function Login() {
                 <input
                   style={styles.inputStyles}
                   type="email"
-                  className="form-control"
+                  className="form-control "
                   placeholder="Enter  Email"
                   name="l_email"
                 />
@@ -110,7 +108,7 @@ export default function Login() {
               <div className="form-group p-2">
                 <button
                   type="submit"
-                  className=" btn rounded mt-3 mb-3"
+                  className=" btn rounded mt-3 mb-3 bg-accent"
                   style={styles.buttonStyles}
                 >
                   Login

@@ -9,10 +9,19 @@ import {
 import React, { useEffect, useState } from "react";
 import { fs } from "../../../Firebase/firebase.config";
 import { getAuth } from "firebase/auth";
+import ProjectDescription from "../../ProjectDescription/ProjectDescription";
+import { useNavigate } from "react-router-dom";
 const auth = getAuth();
 export default function Projects() {
   const [projects, setProjects] = useState([]);
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  const handleDetails = (project) => {
+    navigate(`/volunteer/projects/${project.id}`, {
+      state: { project: project },
+    });
+  };
 
   async function checkInterested(pid) {
     const docRef = doc(fs, "projects", pid, "InterestedUsers", user.uid);
@@ -86,7 +95,49 @@ export default function Projects() {
         <h1 className="h1 text-center text-gray-700 p-4">Current Projects</h1>
       </div>
 
-      <div className="py-6 grid grid-cols-3 min-h-screen">
+      <div className="min-h-screen grid grid-cols-3 gap-3 m-3 items-start">
+        {projects.map((project) => {
+          return (
+            <div className="card  w-80 bg-base-100 shadow-xl">
+              <figure>
+                <img
+                  className="w-full h-[200px]"
+                  src={`${project.photoUrl || require("./no_image.jpg")}`}
+                  alt="card img"
+                />
+              </figure>
+              <div className="badge  bg-amber-200 rounded-none">
+                {" "}
+                Duration: {project.starts} to {project.ends}
+              </div>
+              <div className="card-body">
+                <h2 className="card-title">{project.title}</h2>
+                <p>Location: {project.location}</p>
+                <div className="card-actions justify-end">
+                  <button
+                    onClick={() => handleDetails(project)}
+                    className="btn btn-sm btn-outline"
+                  >
+                    Details
+                  </button>
+
+                  <button
+                    className={`btn btn-sm btn-outline text-white ${
+                      project.interested ? " bg-amber-300" : " bg-lime-300"
+                    } `}
+                    onClick={() => interestHandler(project)}
+                  >
+                    {`${project.interested ? "Not" : ""} Interested?`}
+                  </button>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/**
+      <div className="py-5 grid grid-cols-3 min-h-screen">
         {projects.map((project) => {
           return (
             <div
@@ -110,10 +161,7 @@ export default function Projects() {
                     {project.starts} to {project.ends}
                   </p>
                   <p className="text-gray-700 text-base mt-3 h-[120px] ">
-                    <strong>
-                      Description: <br />
-                    </strong>
-                    {project.description}
+                    <button className="btn">Description</button>
                   </p>
                 </div>
                 <div className="card-actions justify-end ">
@@ -130,7 +178,7 @@ export default function Projects() {
             </div>
           );
         })}
-      </div>
+      </div> */}
     </div>
   );
 }

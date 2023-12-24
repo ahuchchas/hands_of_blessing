@@ -26,32 +26,40 @@ const ProjectResponse = () => {
   }, []);
 
   return (
-    <div className="overflow-x-auto m-3">
-      {/* {console.log(volunteers)} */}
-      <h2 className=" text-2xl text-center my-12">
-        Interested volunteers in the project titled{" "}
-        <span className=" font-bold">'{project_title}'</span>
-      </h2>
-      <table className="table">
-        {/* head */}
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-          </tr>
-        </thead>
-        <tbody>
-          {/* rows*/}
-          {volunteers.map((volunteer) => (
-            <tr className=" font-bold" key={volunteer.email}>
-              <td>{volunteer.name}</td>
-              <td>{volunteer.email}</td>
-              <td>{volunteer.phone}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div>
+      {volunteers.length ? (
+        <div className="overflow-x-auto m-3">
+          {/* {console.log(volunteers)} */}
+          <h2 className=" text-2xl text-center my-12">
+            Interested volunteers in the project titled{" "}
+            <span className=" font-bold">'{project_title}'</span>
+          </h2>
+          <table className="table">
+            {/* head */}
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* rows*/}
+              {volunteers.map((volunteer) => (
+                <tr className=" font-bold" key={volunteer.email}>
+                  <td>{volunteer.name}</td>
+                  <td>{volunteer.email}</td>
+                  <td>{volunteer.phone}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <div className=" min-h-screen w-full flex justify-center items-center">
+          <h1 className="text-accent text-4xl">No one is interested yet !!</h1>
+        </div>
+      )}
     </div>
   );
 };
