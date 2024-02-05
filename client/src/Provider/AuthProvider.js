@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { createContext } from "react";
+import { createContext, useEffect, useState } from "react";
 
 import {
   createUserWithEmailAndPassword,
@@ -30,7 +29,7 @@ export default function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
-      console.log("current user", user);
+      // console.log("current user", user);
       setLoading(false);
     });
 

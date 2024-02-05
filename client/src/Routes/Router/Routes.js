@@ -7,24 +7,23 @@ import Login from "../../Pages/Login/Login";
 import Registration from "../../Pages/Registration/Registration";
 import VolunteerProfile from "../../Pages/VolunteerDash/VolunteerProfile/VolunteerProfile";
 
-import VolunteerDash from "../../Pages/VolunteerDash/VolunteerDash";
-import EditProfile from "../../Pages/VolunteerDash/EditProfile/EditProfile";
-import AllVolunteers from "../../Pages/VolunteerDash/AllVolunteers/AllVolunteers";
-import Help from "../../Pages/Help/Help";
 import AdminDash from "../../Pages/AdminDash/AdminDash";
-import Volunteers from "../../Pages/AdminDash/Volunteers/Volunteers";
-import NewProject from "../../Pages/AdminDash/NewProject/NewProject";
-import HelpRequests from "../../Pages/AdminDash/HelpRequests/HelpRequests";
-import Projects from "../../Pages/VolunteerDash/Projects/Projects";
-import AllProjects from "../../Pages/AdminDash/Projects/AllProjects";
-import AboutUs from "../../components/AboutUs/AboutUs";
-import EditProject from "../../Pages/AdminDash/EditProject/EditProject";
 import DeleteProject from "../../Pages/AdminDash/DeleteProject/DeleteProject";
+import EditProject from "../../Pages/AdminDash/EditProject/EditProject";
+import HelpRequests from "../../Pages/AdminDash/HelpRequests/HelpRequests";
+import NewProject from "../../Pages/AdminDash/NewProject/NewProject";
+import ProjectResponse from "../../Pages/AdminDash/ProjectResponse/ProjectResponse";
+import AllProjects from "../../Pages/AdminDash/Projects/AllProjects";
+import AllVolunteers from "../../Pages/AllVolunteers/AllVolunteers";
 import Donate from "../../Pages/Donate/Donate";
 import DonateSuccess from "../../Pages/Donate/DonateSuccess/DonateSuccess";
-import Chats from "../../Pages/VolunteerDash/Chats/Chats";
-import ProjectResponse from "../../Pages/AdminDash/ProjectResponse/ProjectResponse";
+import Help from "../../Pages/Help/Help";
 import ProjectDescription from "../../Pages/ProjectDescription/ProjectDescription";
+import Chats from "../../Pages/VolunteerDash/Chats/Chats";
+import EditProfile from "../../Pages/VolunteerDash/EditProfile/EditProfile";
+import Projects from "../../Pages/VolunteerDash/Projects/Projects";
+import VolunteerDash from "../../Pages/VolunteerDash/VolunteerDash";
+import AboutUs from "../../components/AboutUs/AboutUs";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +41,14 @@ export const router = createBrowserRouter([
       {
         path: "/help",
         element: <Help></Help>,
+      },
+      {
+        path: "/find-volunteers",
+        element: (
+          <div className="w-[80%] mx-auto">
+            <AllVolunteers />
+          </div>
+        ),
       },
       {
         path: "/login",
@@ -102,7 +109,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "volunteers",
-            element: <Volunteers></Volunteers>,
+            element: <AllVolunteers></AllVolunteers>,
           },
           {
             path: "projects",

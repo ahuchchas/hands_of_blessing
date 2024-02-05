@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { FaHandHoldingHeart } from "react-icons/fa";
 import { getAuth } from "firebase/auth";
+import React, { useEffect, useState } from "react";
+import { FaHandHoldingHeart } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 import app from "../../Firebase/firebase.config";
 const auth = getAuth(app);
 
@@ -114,15 +114,16 @@ export default function Navbar() {
             <li>
               <Link to="/help">Ask help</Link>
             </li>
-            {/* <li>
-              <Link to="/about">About Us</Link>
-            </li> */}
+
             <li>
               <Link to="/donate">Donate</Link>
             </li>
 
             {userType === "public" && (
               <>
+                <li>
+                  <Link to="/find-volunteers">Find Volunteers</Link>
+                </li>
                 <li>
                   <Link to="/register">Register</Link>
                 </li>

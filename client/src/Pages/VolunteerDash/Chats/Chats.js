@@ -1,20 +1,18 @@
-import React from "react";
-import { useEffect, useState, useRef } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import {
-  getDocs,
-  addDoc,
-  serverTimestamp,
-  onSnapshot,
-  query,
-  orderBy,
-} from "firebase/firestore";
-import { fs } from "../../../Firebase/firebase.config";
-import { collection } from "firebase/firestore";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { getAuth } from "firebase/auth";
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+} from "firebase/firestore";
+import React, { useEffect, useRef, useState } from "react";
+import { fs } from "../../../Firebase/firebase.config";
 
 const auth = getAuth();
 
@@ -29,7 +27,7 @@ export default function Chats() {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
   useEffect(() => {
-    AOS.init({ duration: 3000 });
+    AOS.init({ duration: 300 });
     auth.onAuthStateChanged((volunteer) => {
       if (volunteer) {
         setVolunteer(volunteer);
