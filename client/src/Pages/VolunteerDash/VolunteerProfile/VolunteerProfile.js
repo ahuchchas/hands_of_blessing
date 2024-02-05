@@ -10,14 +10,19 @@ import { ref } from "firebase/storage";
 import { storage } from "../../../Firebase/firebase.config";
 import { useNavigate } from "react-router-dom";
 import { getDownloadURL } from "firebase/storage";
+
+import AOS from "aos";
+import "aos/dist/aos.css";
+import Aos from "aos";
+
 const auth = getAuth();
 
 export default function VolunteerProfile() {
-  // const [volunteers, setVolunteers] = useState([]);
   const [user, setUser] = useState({});
   const [userPhoto, setUserPhoto] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
+    Aos.init({ duration: 3000 });
     auth.onAuthStateChanged((volunteer) => {
       if (volunteer) {
         async function getUserDoc() {
@@ -41,7 +46,6 @@ export default function VolunteerProfile() {
         getUserDoc();
       } else {
         navigate("/login");
-        // alert("Please Register or  Login first ! ");
       }
     });
   }, []);
@@ -49,6 +53,7 @@ export default function VolunteerProfile() {
   return (
     <div className="d-flex justify-center mt-5 ">
       <div
+        data-aos="fade-up"
         className="card w-75 mt-6  bg-white   "
         style={{
           minHeight: "15rem",

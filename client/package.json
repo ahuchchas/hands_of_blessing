@@ -23,7 +23,7 @@
     "react-scripts": "5.0.1",
     "react-social-login-buttons": "^3.9.1",
     "sweetalert2": "^11.10.1",
-    "swiper": "^11.0.2",
+    "swiper": "^11.0.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

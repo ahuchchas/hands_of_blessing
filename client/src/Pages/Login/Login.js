@@ -7,7 +7,7 @@ const auth = getAuth(app);
 const styles = {
   inputStyles: {
     border: "none",
-    backgroundColor: "#fffec8",
+
     padding: "10px",
   },
   buttonStyles: {
@@ -60,62 +60,54 @@ export default function Login() {
     }
   };
   return (
-    <div className="container d-flex flex-col justify-center align-items-center mt-5 mb-5 text-center rounded">
+    <div className=" d-flex flex-col justify-center align-items-center mt-5 mb-5 text-center rounded">
       <div
-        className="row  p-4"
+        className="p-4 bg-slate-900   w-5/12"
         style={{
-          width: "70%",
-
           borderRadius: "10px",
-          backgroundColor: "#fffec8",
-          boxShadow: "1px 1px 1px 1px gray",
+          border: "2px solid #fffec1",
         }}
       >
-        <div className="col-md-6">
-          <img src="regBackground2.png" />
-        </div>
-        <div className="col-md-6">
-          <div>
-            <h2
-              className="h2 mt-5 text-slate-800"
-              style={{
-                fontWeight: "bold",
-              }}
-            >
-              Login Form
-            </h2>
+        <div>
+          <h2
+            className="h2 mt-5 text-white"
+            style={{
+              fontWeight: "bold",
+            }}
+          >
+            Login Form
+          </h2>
 
-            <form className="p-3" onSubmit={handleLogin}>
-              <div className="form-group p-2">
-                <input
-                  style={styles.inputStyles}
-                  type="email"
-                  className="form-control "
-                  placeholder="Enter  Email"
-                  name="l_email"
-                />
-              </div>
-              <div className="form-group p-2">
-                <input
-                  style={styles.inputStyles}
-                  type="password"
-                  className="form-control"
-                  id="exampleInputPassword1"
-                  placeholder="Password"
-                  name="l_pass"
-                />
-              </div>
-              <div className="form-group p-2">
-                <button
-                  type="submit"
-                  className=" btn rounded mt-3 mb-3 bg-accent"
-                  style={styles.buttonStyles}
-                >
-                  Login
-                </button>
-              </div>
-            </form>
-          </div>
+          <form className="p-3" onSubmit={handleLogin}>
+            <div className="form-group p-2">
+              <input
+                style={styles.inputStyles}
+                type="email"
+                className="form-control "
+                placeholder="Enter  Email"
+                name="l_email"
+              />
+            </div>
+            <div className="form-group p-2">
+              <input
+                style={styles.inputStyles}
+                type="password"
+                className="form-control"
+                id="exampleInputPassword1"
+                placeholder="Password"
+                name="l_pass"
+              />
+            </div>
+            <div className="form-group p-2">
+              <button
+                type="submit"
+                className=" btn rounded mt-3 mb-3 bg-accent"
+                style={styles.buttonStyles}
+              >
+                Login
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

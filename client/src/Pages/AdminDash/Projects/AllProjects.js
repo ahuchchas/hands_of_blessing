@@ -4,6 +4,9 @@ import { fs } from "../../../Firebase/firebase.config";
 import { Link, useNavigate } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import Aos from "aos";
 export default function AllProjects() {
   const [projects, setProjects] = useState([]);
   const navigate = useNavigate();
@@ -15,6 +18,7 @@ export default function AllProjects() {
   };
 
   useEffect(() => {
+    Aos.init({ duration: 3000 });
     const fetchProjects = async () => {
       const ps = [];
       const querySnapshot = await getDocs(collection(fs, "projects"));
@@ -31,14 +35,17 @@ export default function AllProjects() {
 
   return (
     <div>
-      <div>
+      <div data-aos="zoom-in">
         <h1 className="h1 text-center text-gray-700 p-4">Current Projects</h1>
       </div>
 
       <div className="min-h-screen grid grid-cols-3 gap-3 m-3 items-start">
         {projects.map((project) => {
           return (
-            <div className="card  w-80 bg-base-100 shadow-xl">
+            <div
+              className="card  w-80 bg-base-100 shadow-xl"
+              data-aos="fade-out"
+            >
               <figure>
                 <img
                   className="w-full h-[200px]"

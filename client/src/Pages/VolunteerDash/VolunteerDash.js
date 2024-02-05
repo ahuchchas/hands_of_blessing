@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { useEffect } from "react";
+import { FaUserCircle } from "react-icons/fa";
 import { getAuth } from "firebase/auth";
 import app from "../../Firebase/firebase.config";
 import { useNavigate } from "react-router-dom";
 const auth = getAuth(app);
 export default function VolunteerDash() {
   const [isUser, setUser] = useState(false);
+  const [userEmail, setUserEmail] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -14,6 +16,7 @@ export default function VolunteerDash() {
         if (user.email !== "admin123@gmail.com") {
           setUser(true);
         }
+        setUserEmail(user.email);
       }
     });
   }, []);
@@ -50,14 +53,10 @@ export default function VolunteerDash() {
         <div className="flex bg-gray-100 w-full min-h-screen">
           <div className="w-3/12 bg-white rounded p-3 ">
             <div className="flex items-center space-x-4 p-2 mb-5">
-              <img
-                className="h-12 rounded-full"
-                src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
-                alt="profile"
-              />
-              <div>
+              <div className="flex justify-center items-center">
+                <FaUserCircle className="text-lg text-gray-700 me-4"></FaUserCircle>
                 <h4 className="font-semibold text-lg text-gray-700 capitalize font-poppins tracking-wide">
-                  User
+                  Volunteer Dashboard
                 </h4>
                 {/* <span className="text-sm tracking-wide flex items-center space-x-1">
           icon

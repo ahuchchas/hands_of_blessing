@@ -2,7 +2,7 @@ import React from "react";
 import TopBanner from "../../components/TopBanner/TopBanner";
 import Services from "../../components/Services/Services";
 import JoinUs from "../../components/JoinUs/JoinUs";
-import ContactUs from "../../components/ContactUs/ContactUs";
+
 import DonationCover from "../../components/DonationCover/DonationCover";
 
 export default function Home() {
