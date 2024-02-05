@@ -66,8 +66,8 @@ export default function ProjectDescription() {
           <div>
             <figure>
               {project.photoUrl && (
-                <div className="avatar">
-                  <div className="rounded-xl">
+                <div className="avatar ">
+                  <div className="rounded-xl w-[500px]  h-[500px]">
                     <img src={project.photoUrl} />
                   </div>
                 </div>

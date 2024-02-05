@@ -1,7 +1,8 @@
 import React from "react";
 import { useEffect, useState, useRef } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 import {
   getDocs,
   addDoc,
@@ -23,11 +24,12 @@ export default function Chats() {
   const [selectedUser, setSelectedUser] = useState("");
   const [users, setUsers] = useState([]);
   const [volunteer, setVolunteer] = useState(null);
-  const [chats, setChats] = useState([]);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+
   useEffect(() => {
+    AOS.init({ duration: 3000 });
     auth.onAuthStateChanged((volunteer) => {
       if (volunteer) {
         setVolunteer(volunteer);
@@ -53,9 +55,6 @@ export default function Chats() {
     });
   }, [selectedUser]);
 
-  useEffect(() => {
-    messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, showEmojiPicker]);
   const handleSelectUser = (user) => {
     setSelectedUser(user);
     console.log("selected user : ", user);
@@ -83,6 +82,7 @@ export default function Chats() {
 
       setNewMessage("");
       setShowEmojiPicker(false);
+      messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -108,32 +108,33 @@ export default function Chats() {
   {
   }
   return (
-    <div className="p-4 m-4   max-h-100  bg-amber-200 ">
+    <div className="p-4 m-4   max-h-100  bg-slate-900 " data-aos="fade-in">
       <div className="flex w-full min-h-full p-2">
-        <div className="w-5/12 bg-white rounded p-3 ">
+        <div className="w-5/12 bg-slate-800 rounded p-3 ">
           <div className="">
             <div className="flex items-center space-x-4 p-2 mb-5 ">
-              <div className="avatar me-4">
+              <div className="avatar me-2">
                 <div className="w-12 rounded-full">
                   <img src={auth.currentUser.photoURL} />
                 </div>
               </div>
-              <h4 className="font-semibold text-lg text-gray-700 capitalize font-poppins tracking-wide">
+              <h4 className="font-semibold text-lg text-white capitalize font-poppins tracking-wide">
                 {auth.currentUser.displayName}
               </h4>
             </div>
           </div>
-          <ul className="space-y-1 text-sm overflow-y-auto">
+          <ul className="space-y-1 text-sm  text-white">
             {users
               .filter((user) => user.uid !== volunteer.uid)
               .map((user) => {
                 return (
                   <li
+                    data-aos="zoom-in"
                     onClick={() => {
                       handleSelectUser(user);
                     }}
                   >
-                    <div className="flex  items-center px-4">
+                    <div className="flex  items-center px-2">
                       <div className="avatar me-4">
                         <div className="w-12 rounded-full">
                           <img src={user.imageRef} />
@@ -145,7 +146,7 @@ export default function Chats() {
 
                     <div
                       className=" mx-3 my-3"
-                      style={{ border: "1px solid lightgray" }}
+                      style={{ border: "1px solid white" }}
                     ></div>
                   </li>
                 );

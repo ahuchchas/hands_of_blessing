@@ -152,96 +152,82 @@ export default function Registration() {
     }
   };
   return (
-    <div className="container d-flex flex-col justify-center align-items-center mt-5 mb-5 text-center rounded">
+    <div className=" d-flex flex-col justify-center align-items-center mt-5 mb-5 text-center rounded">
       <div
-        className="row rounded "
+        className="p-4 bg-slate-900   w-5/12"
         style={{
-          width: "70%",
-          boxShadow: "1px 1px 1px 1px gray",
-          backgroundColor: "#fffec8",
+          borderRadius: "10px",
+          border: "2px solid #fffec1",
         }}
       >
-        <div className="col-lg-6 col-md-5 col-sm-5  p-5 d-flex justify-center align-items-center">
-          <img src="regBackground2.png" className="img-fluid" />
-        </div>
-        <div className="col-lg-6 col-md-5 col-sm-5 ">
-          <h2
-            className="h2 mt-4"
-            style={{
-              color: "#0D1338",
-              fontWeight: "bold",
-            }}
-          >
-            Registration Form
-          </h2>
-          <form className="p-5" onSubmit={handleRegistration}>
-            <div className="form-group p-2">
-              <input
-                style={styles.inputStyles}
-                type="text"
-                class="form-control"
-                placeholder="Enter Full Name"
-                name="r_name"
-                onChange={(event) => setName(event.target.value)}
-              />
-            </div>
-            <div className="form-group p-2">
-              <input
-                style={styles.inputStyles}
-                type="email"
-                className="form-control"
-                placeholder="Enter  Email"
-                name="r_email"
-                onChange={(event) => setEmail(event.target.value)}
-              />
-            </div>
-            <div className="form-group p-2">
-              <input
-                style={styles.inputStyles}
-                type="text"
-                className="form-control"
-                placeholder="Enter Phone Number"
-                name="r_phone"
-                onChange={(event) => setPhone(event.target.value)}
-              />
-            </div>
-            <div className="form-group p-2">
-              <input
-                style={styles.inputStyles}
-                type="text"
-                className="form-control"
-                placeholder="Enter Address"
-                name="r_address"
-                onChange={(event) => setAddress(event.target.value)}
-              />
-            </div>
-            <div className="form-group p-2">
-              <input
-                style={styles.inputStyles}
-                type="password"
-                className="form-control"
-                id="exampleInputPassword1"
-                placeholder="Password"
-                name="r_password"
-                onChange={(event) => setPassword(event.target.value)}
-              />
-            </div>
-            <div className="form-group p-2">
-              <input
-                style={styles.inputStyles}
-                type="text"
-                className="form-control"
-                placeholder="Confirm Password"
-                name="r_conpassword"
-                onChange={(event) => setConPassword(event.target.value)}
-              />
-            </div>
-            <p style={{ color: "red" }}>{validate ? "" : error}</p>
-            <button type="submit" className="btn  btn-sm btn-accent mt-5 ">
-              Submit
-            </button>
-          </form>
-        </div>
+        <h2 className="h2 mt-4 text-white">Registration Form</h2>
+        <form className="p-5" onSubmit={handleRegistration}>
+          <div className="form-group p-2">
+            <input
+              style={styles.inputStyles}
+              type="text"
+              class="form-control"
+              placeholder="Enter Full Name"
+              name="r_name"
+              onChange={(event) => setName(event.target.value)}
+            />
+          </div>
+          <div className="form-group p-2">
+            <input
+              style={styles.inputStyles}
+              type="email"
+              className="form-control"
+              placeholder="Enter  Email"
+              name="r_email"
+              onChange={(event) => setEmail(event.target.value)}
+            />
+          </div>
+          <div className="form-group p-2">
+            <input
+              style={styles.inputStyles}
+              type="text"
+              className="form-control"
+              placeholder="Enter Phone Number"
+              name="r_phone"
+              onChange={(event) => setPhone(event.target.value)}
+            />
+          </div>
+          <div className="form-group p-2">
+            <input
+              style={styles.inputStyles}
+              type="text"
+              className="form-control"
+              placeholder="Enter Address"
+              name="r_address"
+              onChange={(event) => setAddress(event.target.value)}
+            />
+          </div>
+          <div className="form-group p-2">
+            <input
+              style={styles.inputStyles}
+              type="password"
+              className="form-control"
+              id="exampleInputPassword1"
+              placeholder="Password"
+              name="r_password"
+              onChange={(event) => setPassword(event.target.value)}
+            />
+          </div>
+          <div className="form-group p-2">
+            <input
+              style={styles.inputStyles}
+              type="text"
+              className="form-control"
+              placeholder="Confirm Password"
+              name="r_conpassword"
+              onChange={(event) => setConPassword(event.target.value)}
+            />
+          </div>
+          <p style={{ color: "red" }}>{validate ? "" : error}</p>
+          <button type="submit" className="btn  btn-sm btn-accent mt-5 ">
+            Submit
+          </button>
+        </form>
       </div>
     </div>
   );

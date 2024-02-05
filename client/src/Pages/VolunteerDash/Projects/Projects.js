@@ -9,14 +9,19 @@ import {
 import React, { useEffect, useState } from "react";
 import { fs } from "../../../Firebase/firebase.config";
 import { getAuth } from "firebase/auth";
-import ProjectDescription from "../../ProjectDescription/ProjectDescription";
+
 import { useNavigate } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const auth = getAuth();
 export default function Projects() {
   const [projects, setProjects] = useState([]);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
-
+  useEffect(() => {
+    AOS.init({ duration: 3000 });
+  }, []);
   const handleDetails = (project) => {
     navigate(`/volunteer/projects/${project.id}`, {
       state: { project: project },
@@ -98,7 +103,10 @@ export default function Projects() {
       <div className="min-h-screen grid grid-cols-3 gap-3 m-3 items-start">
         {projects.map((project) => {
           return (
-            <div className="card  w-80 bg-base-100 shadow-xl">
+            <div
+              className="card  w-80 bg-base-100 shadow-xl"
+              data-aos="zoom-in"
+            >
               <figure>
                 <img
                   className="w-full h-[200px]"

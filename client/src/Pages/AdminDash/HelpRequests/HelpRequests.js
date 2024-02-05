@@ -1,30 +1,31 @@
-import React from "react";
+import { collection, getDocs } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { fs } from "../../../Firebase/firebase.config";
 
 export default function HelpRequests() {
-  const requests = [
-    {
-      area: "Kanaighat",
-      type: "Relief",
-      contact: "01712345678",
-      description:
-        "In Kanaighat Upazila there is a sudden flood. People here need relief and other necessary volunteer support",
-    },
-    {
-      area: "Companiganj",
-      type: "Relief",
-      contact: "01712345678",
-      description:
-        "In Kanaighat Upazila there is a sudden flood. People here need relief and other necessary volunteer support",
-    },
-    {
-      area: "Sunamganj Sadar",
-      type: "Relief",
-      contact: "01712345678",
-      description:
-        "In Kanaighat Upazila there is a sudden flood. People here need relief and other necessary volunteer support",
-    },
-  ];
+  const [requests, setRequests] = useState([]);
 
+  const [selectedReq, setSelectedReq] = useState({});
+  useEffect(() => {
+    getDocs(collection(fs, "helpReq")).then((querySnapshot) => {
+      const req = [];
+      querySnapshot.forEach((doc) => {
+        const reqInfo = {
+          name: doc.data().name,
+          phone: doc.data().phone,
+          area: doc.data().area,
+          description: doc.data().description,
+        };
+
+        req.push(reqInfo);
+        setRequests(req);
+      });
+    });
+  }, []);
+
+  const handleModalSelection = (req) => {
+    setSelectedReq(req);
+  };
   return (
     <div>
       <p className="m-4 text-4xl font-bold text-slate-800 text-center my-5">
@@ -35,10 +36,12 @@ export default function HelpRequests() {
           {/* head */}
           <thead>
             <tr>
+              <th>Requester Name</th>
               <th>Area/Location</th>
-              <th>Support type</th>
+
               <th>Contact No.</th>
-              <th></th>
+
+              <th>Support Type</th>
             </tr>
           </thead>
           <tbody>
@@ -48,14 +51,43 @@ export default function HelpRequests() {
                   <td>
                     <div className="flex items-center space-x-3">
                       <div>
-                        <div className="font-bold">{request.area}</div>
+                        <td>{request.name}</td>
                       </div>
                     </div>
                   </td>
-                  <td>{request.type}</td>
-                  <td>{request.contact}</td>
+                  <td>{request.area}</td>
+                  <td>{request.phone}</td>
+                  <td>{request.supportType}</td>
                   <th>
-                    <button className="btn btn-ghost btn-xs">details</button>
+                    {/* The button to open modal */}
+                    <label
+                      htmlFor="my_modal_7"
+                      className="btn btn-sm"
+                      onClick={() => handleModalSelection(request)}
+                    >
+                      Problem Details
+                    </label>
+
+                    <input
+                      type="checkbox"
+                      id="my_modal_7"
+                      className="modal-toggle"
+                    />
+                    <div className="modal" role="dialog">
+                      <div className="modal-box">
+                        <h1 className="h1 text-secondary">Request Details</h1>
+                        <h3 className="text-lg font-bold">
+                          Requester Name: {selectedReq.name}
+                        </h3>
+                        <p className="">Support Need in {selectedReq.area}</p>
+                        <p className="">
+                          Description: {selectedReq.description}
+                        </p>
+                      </div>
+                      <label className="modal-backdrop" htmlFor="my_modal_7">
+                        Close
+                      </label>
+                    </div>
                   </th>
                 </tr>
               );
