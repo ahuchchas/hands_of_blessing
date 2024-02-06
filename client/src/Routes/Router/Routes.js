@@ -44,11 +44,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/find-volunteers",
-        element: (
-          <div className="w-[80%] mx-auto">
-            <AllVolunteers />
-          </div>
-        ),
+        element: <AllVolunteers />,
       },
       {
         path: "/login",
