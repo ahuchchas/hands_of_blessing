@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 export default function TopBanner() {
   useEffect(() => {
@@ -32,11 +32,13 @@ export default function TopBanner() {
               volunteering opportunities and provide necessary support to them.
               So that the humanity can be served in a better way.
             </p>
-            <button className="btn  border-0  bg-orange-400 rounded-none">
-              <Link to="/register" className=" text-white">
-                Join Now
-              </Link>
-            </button>
+
+            <Link
+              to="/register"
+              className="btn border-0 bg-orange-400 rounded-none text-white"
+            >
+              Join Now
+            </Link>
           </div>
         </div>
       </div>

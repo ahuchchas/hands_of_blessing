@@ -10,9 +10,9 @@ import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import app, { fs } from "../../Firebase/firebase.config";
 const auth = getAuth(app);
+
 const styles = {
   inputStyles: {
-    border: "none",
     border: "1px solid #FDFD96",
     padding: "6px",
     width: "100%",
@@ -28,126 +28,119 @@ export default function Registration() {
   const [password, setPassword] = useState("");
   const [conPassword, setConPassword] = useState("");
   const [error, setError] = useState("");
-  const [validate, setValidate] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const handleRegistration = (event) => {
     event.preventDefault();
-
+    setError("");
     /*RegEx for input validation */
     const namePattern = /^[a-zA-z .]+$/;
     const phnPattern = /^(\+88)?-?01[3-9]\d{8}$/;
     const passPattern =
       /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/;
-    const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    const emailPattern = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
     /* Name validation:*/
-    if (name.length == 0) {
+    if (
+      name.length === 0 ||
+      phone.length === 0 ||
+      email.length === 0 ||
+      address.length === 0
+    ) {
       setError("Empty field is not allowed !");
-
-      setValidate(false);
-    } else if (!name.match(namePattern)) {
+      return;
+    }
+    if (!name.match(namePattern)) {
       setError("Only Alphabets are Allowed ");
-      setValidate(false);
-    } else if (name.length < 3 || name.length > 30) {
+      return;
+    }
+    if (name.length < 3 || name.length > 30) {
       setError("Length of name must be within 3-30 ");
-
-      setValidate(false);
+      return;
     }
     /* Phone Number validation:*/
 
-    if (phone.length == 0) {
-      setError("Empty is not Allowed !!");
-      setValidate(false);
-    } else if (!phone.match(phnPattern)) {
+    if (!phone.match(phnPattern)) {
       setError("Please Enter a valid bangladeshi mobile number!!");
-      setValidate(false);
+      return;
     }
 
     /*Password Validation*/
 
-    if (password.length == 0) {
-      setError("Empty field is not allowed !");
-
-      setValidate(false);
-    } else if (!password.match(passPattern)) {
+    if (!password.match(passPattern)) {
       setError(
         "Password must contain at least one spacial char,one upper , lower case letter and at least one digit. (At least 8)"
       );
-      setValidate(false);
+      return;
     }
     /* Email validation:*/
 
-    if (email.length == 0) {
-      setError("Empty field is not allowed !");
-
-      setValidate(false);
-    } else if (!email.match(emailPattern)) {
+    if (!email.match(emailPattern)) {
       setError("Email is not valid!");
-
-      setValidate(false);
+      return;
     }
 
     /*Password confirmation */
 
-    if (password != conPassword) {
-      setError("Password doesn't match !");
-      setValidate(false);
-    } else if (validate) {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          console.log(userCredential);
-          const useremail = userCredential.user.email;
-
-          sendEmailVerification(auth.currentUser)
-            .then(() => {
-              alert(
-                "Email verification send !After verification you can login"
-              );
-
-              setDoc(
-                doc(fs, "volunteers", userCredential.user.uid),
-
-                {
-                  uid: userCredential.user.uid,
-                  name: name,
-                  email: email,
-                  address: address,
-                  phone: phone,
-                  password: password,
-                  imageRef:
-                    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png",
-                  availableArea: "",
-                }
-              );
-              updateProfile(auth.currentUser, {
-                displayName: name,
-                photoURL:
-                  "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png",
-              })
-                .then(() => {})
-                .catch((err) => console.log(err));
-              setDoc(
-                doc(fs, "volunteersChat", userCredential.user.uid),
-
-                {}
-              );
-
-              navigate("/login");
-            })
-
-            .catch((err) => {
-              setError(err.message);
-            });
-        })
-        .catch((error) => {
-          if (error.code === "auth/email-already-in-use") {
-            // The email is already registered.
-            alert("User exists. Please try with a different email!");
-          }
-        });
-    } else {
-      return false;
+    if (password !== conPassword) {
+      setError("Password doesn't match!");
+      return;
     }
+
+    setError("");
+    setLoading(true);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // console.log(userCredential);
+        // const useremail = userCredential.user.email;
+
+        sendEmailVerification(auth.currentUser)
+          .then(() => {
+            alert("Email verification send !After verification you can login");
+
+            setDoc(
+              doc(fs, "volunteers", userCredential.user.uid),
+
+              {
+                uid: userCredential.user.uid,
+                name: name,
+                email: email,
+                address: address,
+                phone: phone,
+                password: password,
+                imageRef:
+                  "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png",
+                availableArea: "",
+              }
+            );
+            updateProfile(auth.currentUser, {
+              displayName: name,
+              photoURL:
+                "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png",
+            })
+              .then(() => {})
+              .catch((err) => console.log(err));
+            setDoc(
+              doc(fs, "volunteersChat", userCredential.user.uid),
+
+              {}
+            );
+            setLoading(false);
+            navigate("/login");
+          })
+
+          .catch((err) => {
+            setError(err.message);
+            setLoading(false);
+          });
+      })
+      .catch((error) => {
+        if (error.code === "auth/email-already-in-use") {
+          // The email is already registered.
+          alert("User exists. Please try with a different email!");
+          setLoading(false);
+        }
+      });
   };
   return (
     <div className=" d-flex flex-col justify-center align-items-center mt-5 mb-5 text-center rounded">
@@ -159,7 +152,7 @@ export default function Registration() {
         }}
       >
         <h2 className="h2 mt-4 text-white">Registration Form</h2>
-        <form className="p-5" onSubmit={handleRegistration}>
+        <form className="p-5">
           <div className="form-group p-2">
             <input
               style={styles.inputStyles}
@@ -214,16 +207,27 @@ export default function Registration() {
           <div className="form-group p-2">
             <input
               style={styles.inputStyles}
-              type="text"
+              type="password"
               className="form-control"
               placeholder="Confirm Password"
               name="r_conpassword"
               onChange={(event) => setConPassword(event.target.value)}
             />
           </div>
-          <p style={{ color: "red" }}>{validate ? "" : error}</p>
-          <button type="submit" className="btn  btn-sm btn-accent mt-5 ">
-            Submit
+          <p style={{ color: "red" }}>{error}</p>
+          <button
+            type="button"
+            className="btn  btn-sm btn-accent mt-5 w-50"
+            onClick={(e) => handleRegistration(e)}
+          >
+            {loading ? (
+              <span className=" flex justify-center items-center">
+                Submitting{" "}
+                <span className="loading loading-spinner loading-xs ml-2"></span>
+              </span>
+            ) : (
+              "Submit"
+            )}
           </button>
         </form>
       </div>
