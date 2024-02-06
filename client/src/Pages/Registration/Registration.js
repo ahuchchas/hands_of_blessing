@@ -4,18 +4,15 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   sendEmailVerification,
+  updateProfile,
 } from "firebase/auth";
-import app from "../../Firebase/firebase.config";
-import { fs } from "../../Firebase/firebase.config";
-import { collection, addDoc } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
-import { updateProfile } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import app, { fs } from "../../Firebase/firebase.config";
 const auth = getAuth(app);
 const styles = {
   inputStyles: {
     border: "none",
-
     border: "1px solid #FDFD96",
     padding: "6px",
     width: "100%",
@@ -32,6 +29,7 @@ export default function Registration() {
   const [conPassword, setConPassword] = useState("");
   const [error, setError] = useState("");
   const [validate, setValidate] = useState(true);
+
   const handleRegistration = (event) => {
     event.preventDefault();
 
