@@ -11,17 +11,16 @@ export default function Navbar() {
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
-      if (user) {
-        if (user.email === "admin123@gmail.com") {
-          setUserType("admin");
-        } else {
-          setUserType("volunteer");
-        }
+      if (user?.email === "admin123@gmail.com") {
+        setUserType("admin");
+      } else if (user?.emailVerified) {
+        setUserType("volunteer");
       } else {
         setUserType("public");
       }
     });
-  }, []);
+    console.log("nav effect called");
+  });
 
   function handleLogout() {
     auth.signOut();
