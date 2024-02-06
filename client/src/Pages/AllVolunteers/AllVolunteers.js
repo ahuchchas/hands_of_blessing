@@ -1,8 +1,10 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { getAuth } from "firebase/auth";
 import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { fs } from "../../Firebase/firebase.config";
+import app, { fs } from "../../Firebase/firebase.config";
+const auth = getAuth(app);
 
 export default function AllVolunteers() {
   const [users, setUsers] = useState([]);
@@ -68,7 +70,11 @@ export default function AllVolunteers() {
         </p>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-3 mx-auto">
+      <div
+        className={`grid grid-cols-1 ${
+          auth.currentUser === null ? "md:grid-cols-4" : "md:grid-cols-3"
+        } gap-4 p-3 mx-auto`}
+      >
         {filteredUsers.map((user) => {
           return (
             <div
