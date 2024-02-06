@@ -106,8 +106,8 @@ export default function Chats() {
   {
   }
   return (
-    <div className="p-4 m-4   max-h-100  bg-slate-900 " data-aos="fade-in">
-      <div className="flex w-full min-h-full p-2">
+    <div className="p-4 m-4  bg-slate-900 " data-aos="fade-in">
+      <div className="flex w-full  h-[600px]   p-2">
         <div className="w-5/12 bg-slate-800 rounded p-3 ">
           <div className="">
             <div className="flex items-center space-x-4 p-2 mb-5 ">
@@ -121,7 +121,10 @@ export default function Chats() {
               </h4>
             </div>
           </div>
-          <ul className="space-y-1 text-sm  text-white">
+          <ul
+            className="space-y-1 text-sm  text-white h-[400px] "
+            style={{ overflowY: "scroll" }}
+          >
             {users
               .filter((user) => user.uid !== volunteer.uid)
               .map((user) => {
@@ -175,7 +178,7 @@ export default function Chats() {
 
                 <div>
                   <ul
-                    className="d-flex flex-col p-4   h-96  "
+                    className="d-flex flex-col p-4   h-[462px]  "
                     style={{ overflowY: "scroll" }}
                   >
                     {messages.map((message, index) => (

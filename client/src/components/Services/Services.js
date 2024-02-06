@@ -14,19 +14,19 @@ export default function Services() {
     {
       title: "We are available 24/7",
       description:
-        "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+        "Round-the-clock support for all your needs, ensuring assistance is available anytime, day or night.",
       image: <GoStopwatch></GoStopwatch>,
     },
     {
       title: "Providing volunteering support",
       description:
-        "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+        "Empowering positive change through dedicated assistance and guidance in your volunteering journey.",
       image: <MdVolunteerActivism></MdVolunteerActivism>,
     },
     {
       title: "Contact us for help",
       description:
-        "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
+        "Reach out to us for guidance and support on our volunteering platform, connecting you with opportunities to make a positive impact.",
       image: <MdPhoneCallback />,
     },
   ];
