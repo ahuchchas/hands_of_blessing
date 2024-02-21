@@ -103,12 +103,11 @@ export default function Chats() {
       }
     );
   }, [selectedUser]);
-  {
-  }
+
   return (
-    <div className="p-4 m-4   max-h-100  bg-slate-900 " data-aos="fade-in">
+    <div className="p-2 m-4   max-h-100  bg-slate-900 " data-aos="fade-in">
       <div className="flex w-full min-h-full p-2">
-        <div className="w-5/12 bg-slate-800 rounded p-3 ">
+        <div className="w-5/12 bg-slate-800 rounded p-2">
           <div className="">
             <div className="flex items-center space-x-4 p-2 mb-5 ">
               <div className="avatar me-2">
@@ -131,6 +130,7 @@ export default function Chats() {
                     onClick={() => {
                       handleSelectUser(user);
                     }}
+                    className=" hover:cursor-pointer"
                   >
                     <div className="flex  items-center px-2">
                       <div className="avatar me-4">
@@ -152,7 +152,7 @@ export default function Chats() {
           </ul>
         </div>
 
-        <div className="w-7/12  " style={{ backgroundColor: "#F5F7FE" }}>
+        <div className="w-7/12 p-2" style={{ backgroundColor: "#F5F7FE" }}>
           <div>
             {selectedUser ? (
               <div
@@ -235,8 +235,8 @@ export default function Chats() {
                   </ul>
                 </div>
 
-                <div className="form-control   h-14  flex items-center p-1">
-                  <div className="flex  items-center  ">
+                <div className="form-control flex items-center p-2">
+                  <div className="flex items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="20"

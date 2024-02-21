@@ -120,11 +120,11 @@ export default function Registration() {
             })
               .then(() => {})
               .catch((err) => console.log(err));
-            setDoc(
-              doc(fs, "volunteersChat", userCredential.user.uid),
+            // setDoc(
+            //   doc(fs, "volunteersChat", userCredential.user.uid),
 
-              {}
-            );
+            //   {}
+            // );
             setLoading(false);
             navigate("/login");
           })

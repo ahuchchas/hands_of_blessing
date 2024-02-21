@@ -1,9 +1,9 @@
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { addDoc, collection } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { fs } from "../../Firebase/firebase.config";
-import AOS from "aos";
-import "aos/dist/aos.css";
 export default function Help() {
   useEffect(() => {
     AOS.init({ duration: 3000 });
@@ -93,8 +93,7 @@ export default function Help() {
         className="hero min-h-[400px]"
         style={{
           backgroundSize: "cover",
-          backgroundImage:
-            "url(https://www.kub-uk.net/wp-content/uploads/2021/05/iStock-1205270037-1.png)",
+          backgroundImage: "url('/help.png')",
         }}
       >
         <div className="hero-overlay bg-opacity-60 "></div>

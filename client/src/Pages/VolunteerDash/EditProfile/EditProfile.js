@@ -1,11 +1,9 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import { getAuth, updateProfile } from "firebase/auth";
-import { fs } from "../../../Firebase/firebase.config";
 import { doc, updateDoc } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytes } from "firebase/storage";
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { fs } from "../../../Firebase/firebase.config";
 
 import { storage } from "../../../Firebase/firebase.config";
 const styles = {
@@ -22,36 +20,30 @@ export default function EditProfile() {
   const location = useLocation();
 
   const [updatedPhoto, setUpdatePhoto] = useState(location.state.imageRef);
-  const [uid, setUid] = useState(location.state.uid);
-  const [userEmail, setUserEmail] = useState(location.state.email);
+  const uid = useState(location.state.uid);
   const [updatedPhone, setUpdatedPhone] = useState(location.state.phone);
   const [updatedAddress, setUpdatedAddress] = useState(location.state.address);
-  const [updatedArea, setUpdatedArea] = useState(null);
-  const [showEditForm, setShowEditForm] = useState(false);
-  const [error, setError] = useState("");
-  const [validate, setValidate] = useState(false);
   const [updatedName, setUpdatedName] = useState(location.state.name);
-  const [userPhoto, setUserPhoto] = useState(null);
   const [availableArea, setUpdatedAvailableArea] = useState(
     location.state.availableArea
   );
-  useEffect(() => {
-    getDownloadURL(ref(storage, `/images/ProfilePictures/${uid}`))
-      .then((photoUrl) => {
-        console.log(photoUrl);
-        setUserPhoto(photoUrl);
-      })
-      .catch((err) => {
-        console.log(err);
-        setUserPhoto(null);
-      });
-  }, []);
+  // useEffect(() => {
+  //   getDownloadURL(ref(storage, `/images/ProfilePictures/${uid}`))
+  //     .then((photoUrl) => {
+  //       console.log(photoUrl);
+  //       setUpdatePhoto(photoUrl);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       setUpdatePhoto(null);
+  //     });
+  // }, []);
 
   const handleSave = async (event) => {
     event.preventDefault();
-    //  *RegEx for input validation
-    const namePattern = /^[a-zA-z .]+$/;
-    const phnPattern = /^(\+88)?-?01[3-9]\d{8}$/;
+    // //  *RegEx for input validation
+    // const namePattern = /^[a-zA-z .]+$/;
+    // const phnPattern = /^(\+88)?-?01[3-9]\d{8}$/;
 
     /**From input values */
     if (updatedName.length === 0 || updatedPhone.length === 0) {
@@ -63,7 +55,7 @@ export default function EditProfile() {
       phone: updatedPhone,
       address: updatedAddress,
       availableArea: availableArea,
-      imageRef: userPhoto,
+      imageRef: updatedPhoto,
     })
       .then(() => {
         alert("Profile Updated successfully!!");
@@ -72,13 +64,12 @@ export default function EditProfile() {
       .catch((err) => alert({ err }));
     await updateProfile(auth.currentUser, {
       displayName: updatedName,
-      photoURL: userPhoto,
+      photoURL: updatedPhoto,
     });
   };
 
   function handleImgUpload(event) {
     const img = event.target.files[0];
-    const imgName = event.target.files[0].name;
     document.getElementById("img-preview").style.display = "block";
     const imgOb = URL.createObjectURL(img);
     document.getElementById("img-preview").src = imgOb;
@@ -101,8 +92,6 @@ export default function EditProfile() {
         style={{
           boxShadow: "1px 1px  gray",
           backgroundColor: "white",
-
-          backgroundColor: "white",
         }}
       >
         <div className="d-flex justify-between"></div>
@@ -110,23 +99,14 @@ export default function EditProfile() {
         <div className="row">
           <p className="text-center h3">Edit Profile</p>
           <div className="col-md-4 d-flex flex-col justify-center ">
-            {userPhoto ? (
-              <img
-                src={userPhoto}
-                className="card-img-top img-fluid mb-3 img-thumbnail"
-                alt="Card  cap"
-                id="img-preview"
-                style={{ width: "300px", height: "250px" }}
-              />
-            ) : (
-              <img
-                src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
-                className="card-img-top img-fluid mb-3 img-thumbnail"
-                alt="Card  cap"
-                id="img-preview"
-                style={{ width: "300px", height: "250px" }}
-              />
-            )}{" "}
+            <img
+              src={updatedPhoto}
+              className="card-img-top img-fluid mb-3 img-thumbnail"
+              alt="Card  cap"
+              id="img-preview"
+              style={{ width: "300px", height: "250px" }}
+            />
+
             <label
               className="btn"
               for="img-upload"
