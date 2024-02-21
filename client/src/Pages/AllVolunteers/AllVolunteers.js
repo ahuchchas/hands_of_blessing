@@ -83,19 +83,15 @@ export default function AllVolunteers() {
               key={user.uid}
             >
               <figure className="px-10 pt-10">
-                {user.imageRef ? (
-                  <img
-                    src={user.imageRef}
-                    className="img-fluid w-100 h-40 rounded-xl"
-                    alt="Album"
-                  />
-                ) : (
-                  <img
-                    src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
-                    className="img-fluid w-100 h-40 rounded-xl"
-                    alt="Album"
-                  />
-                )}
+                <img
+                  src={
+                    user.imageRef
+                      ? user.imageRef
+                      : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
+                  }
+                  className="img-fluid w-100 h-40 rounded-xl"
+                  alt="Album"
+                />
               </figure>
               <div className="card-body mx-1">
                 <h2 className="card-title">Name: {user.name}</h2>
